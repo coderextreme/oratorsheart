@@ -1,0 +1,12 @@
+{
+  "name": "oratorsheart",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--  For people searching videos (normal users) -->
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="main.css"></link>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+
+<body>
+	Search
+	<form id="form" class="table">
+		<div class="row">
+			<span class="cell">Title:</span>
+			<input class="cell" type="text" name="title" id="title"></input>
+		</div>
+		<div class="row">
+			<span class="cell">Orator:</span>
+			<input class="cell" type="text" name="orator" id="orator"></input>
+		</div>
+		<div class="row">
+			<span class="cell">Date:</span>
+			<input class="cell" type="date" name="date" id="date"></input>
+		</div>
+		<div class="row">
+			<span class="cell">Video Link:</span>
+			<input class="cell" type="text" name="video" id="video"></input>
+		</div>
+		<div class="row">
+			<span class="cell">ID:</span>
+			<input class="cell" type="text" name="id" id="id"></input>
+		</div>
+		<button>Submit Video Query/Update</button>
+	</form>
+	<div class="table" id="table">
+	</div>
+</body>
+<script type="application/javascript">
+
+$('#form').submit(function(e) {
+	e.preventDefault();
+	$.post("/search.html", $(this).serialize(), function(videos) {
+		for (video in videos) {
+			updateVideo(videos[video]);
+		}
+	});
+});
+
+function getId(url) {
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+
+    if (match && match[2].length == 11) {
+        return match[2];
+    } else {
+        return 'error';
+    }
+}
+
+function updateVideo(video) {
+	var videoId = getId(video.video);
+	if (typeof videoId !== 'undefined' && videoId !== '') {
+		$("#table").append('<div class="row">'+
+				'<span class="cell">'+video.id+'</span>&nbsp;'+
+				'<span class="cell">'+video.title+'</span>&nbsp;'+
+				'<span class="cell">'+video.date+'</span>&nbsp;'+
+				'<span class="cell">'+video.orator+'</span>&nbsp;'+
+				'<span class="cell"><iframe width="420" height="315" src="//www.youtube.com/embed/'+
+				videoId+'" frameborder="0" allowfullscreen></iframe></span></div>');
+
+	}
+	return false;
+}
+
+</script>
+</html>
