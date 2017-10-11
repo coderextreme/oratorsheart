@@ -9,6 +9,8 @@ var videoId = 0;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // load the vides on the first get
+  videos = [];
+  videoId = 0;
   readSecretAndVideos("client_secret.json");
   res.render('search', { title: 'Search Videos' });
 });
