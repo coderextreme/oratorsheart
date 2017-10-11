@@ -6,25 +6,9 @@ body
 	h1= title
 	form(id='form', method='post', class='table')
 		div(class='row')
-			span(class='cell') Title:
+			span(class='cell') Search:
 			span(class='cell')
-				input(type='text', name='title', id='title')
-		div(class='row')
-			span(class='cell') Orator:
-			span(class='cell')
-				input(type='text', name='orator', id='orator')
-		div(class='row')
-			span(class='cell') Date:
-			span(class='cell')
-				input(type='date', name='date', id='date')
-		div(class='row')
-			span(class='cell') Video Link:
-			span(class='cell')
-				input(type='text', name='video', id='video')
-		div(class='row')
-			span(class='cell') ID:
-			span(class='cell')
-				input(type='text', name='id', id='id')
+				input(type='text', name='search', id='search')
 		button Submit Query
 	div(class='table', id='table')
 script(src='javascripts/search.js')

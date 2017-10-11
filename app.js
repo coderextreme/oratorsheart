@@ -8,9 +8,7 @@ var fs = require("fs");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var form = require('./routes/form');
 var search = require('./routes/search');
-var update = require('./routes/update');
 
 var app = express();
 
@@ -28,9 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/form', form);
 app.use('/search', search);
-app.use('/update', update);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -50,9 +46,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-var videos = [];
-var videoId = 0;
 
 module.exports = app;

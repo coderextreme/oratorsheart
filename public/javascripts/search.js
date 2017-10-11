@@ -1,9 +1,10 @@
 
 $('#form').submit(function(e) {
 	e.preventDefault();
+	$("#table").empty();
 	$.post("/search", $(this).serialize(), function(videos) {
 		for (video in videos) {
-			updateVideo(videos[video]);
+			displayVideo(videos[video]);
 		}
 	});
 });
@@ -19,16 +20,19 @@ function getId(url) {
     }
 }
 
-function updateVideo(video) {
-	var videoId = getId(video.video);
+function displayVideo(video) {
+	var videoId = getId(video["Link"]);
 	if (typeof videoId !== 'undefined' && videoId !== '') {
 		$("#table").append('<div class="row">'+
-				'<span class="cell">'+video.id+'</span>&nbsp;'+
-				'<span class="cell">'+video.title+'</span>&nbsp;'+
-				'<span class="cell">'+video.date+'</span>&nbsp;'+
-				'<span class="cell">'+video.orator+'</span>&nbsp;'+
 				'<span class="cell"><iframe width="420" height="315" src="//www.youtube.com/embed/'+
-				videoId+'" frameborder="0" allowfullscreen></iframe></span></div>');
+				videoId+'" frameborder="0" allowfullscreen></iframe></span>'+
+				'<div class="table">'+
+				'<span class="row">'+video["ID"]+'</span>&nbsp;'+
+				'<span class="row">'+video["Title"]+'</span>&nbsp;'+
+				'<span class="row">'+video["Date on Link"]+'</span>&nbsp;'+
+				'<span class="row">'+video["Author/Orator"]+'</span>&nbsp;'+
+				'</div>'+
+				'</div>');
 
 	}
 	return false;
