@@ -156,6 +156,7 @@ function readVideos(auth) {
       return;
     }
     var rows = response.values;
+	  console.log(rows);
     if (rows.length == 0) {
       console.log('No data found.');
     } else {
