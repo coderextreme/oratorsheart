@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 			var terms = req.body.search.split(" ");
 			for (t in terms) {
 				var term = terms[t];
-				if (columns.join(" ").includes(term) {
+				if (columns.join(" ").includes(term)) {
 					subvideos.push(videos[video]);
 					break;
 				}
