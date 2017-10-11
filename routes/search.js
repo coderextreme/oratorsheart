@@ -26,8 +26,13 @@ router.post('/', function(req, res, next) {
 			for (field in videos[video]) {
 				columns[colId++] = videos[video][field]
 			}
-			if (columns.join(" ").includes(req.body.search)) {
-				subvideos.push(videos[video]);
+			var terms = req.body.search.split(" ");
+			for (t in terms) {
+				var term = terms[t];
+				if (columns.join(" ").includes(term) {
+					subvideos.push(videos[video]);
+					break;
+				}
 			}
 		}
 		console.log(subvideos);
