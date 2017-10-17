@@ -22,9 +22,14 @@ function getId(url) {
 
 function displayVideo(video) {
 	var videoId = getId(video["Link"]);
+	if (videoId === 'error') {
+		videoId = video["Link"];
+	} else {
+		videoId = '//www.youtube.com/embed/'+videoId;
+	}
 	if (typeof videoId !== 'undefined' && videoId !== '') {
 		$("#table").append('<div class="row">'+
-				'<span class="cell"><iframe width="420" height="315" src="//www.youtube.com/embed/'+
+				'<span class="cell"><iframe width="420" height="315" src="'+
 				videoId+'" frameborder="0" allowfullscreen></iframe></span>'+
 				'<div class="table">'+
 				'<span class="row">'+video["ID"]+'</span>&nbsp;'+
