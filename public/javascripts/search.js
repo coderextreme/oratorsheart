@@ -36,15 +36,11 @@ function displayVideo(v, video) {
 			$('<iframe id="iframe'+v+'" width="420" height="315" frameborder="0" allowfullscreen>').appendTo($("#left"+v));
 			$("#iframe").attr("src", videoId);
 		}
-		var right = $("#row"+v).append('<div class="table">');
-		var cell = $(right).append('<span class="row">');
-		$(cell).text(video["ID"]+"&nbsp;");
-		cell = $(right).append('<span class="row">');
-		$(cell).text(video["Title"]+"&nbsp;");
-		cell = $(right).append('<span class="row">');
-		$(cell).text(video["Date on Link"]+"&nbsp;");
-		cell = $(right).append('<span class="row">');
-		$(cell).text(video["Author/Orator"]+"&nbsp;");
+		$("#row"+v).append('<div id="right'+v+'" class="table">');
+		$("#right").append('<span class="row">').text(video["ID"]+"&nbsp;");
+		$("#right").append('<span class="row">').text(video["Title"]+"&nbsp;");
+		$("#right").append('<span class="row">').text(video["Date on Link"]+"&nbsp;");
+		$("#right").append('<span class="row">').text(video["Author/Orator"]+"&nbsp;");
 
 	}
 	return false;
