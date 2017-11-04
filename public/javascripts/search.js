@@ -31,19 +31,19 @@ function displayVideo(video) {
 		var row = $("#table")
 			.append('<div class="row">')
 		if (videoId.match(/facebook/)) {
-			var left = row.append('<span class="cell"><iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURI(videoId)+'&width=420&show_text=false&height=0&appId" width="420" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe></sapn'
+			var left = row.append('<span class="cell"><iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURI(videoId)+'&width=420&show_text=false&height=0&appId" width="420" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe></sapn');
 		} else {
-			var left = row.append('<span class="cell"><iframe width="420" height="315" frameborder="0" allowfullscreen></iframe></span>'))
+			var left = row.append('<span class="cell"><iframe width="420" height="315" frameborder="0" allowfullscreen></iframe></span>');
 			left.attr("src", videoId);
 		}
 		var right = row.append('<div class="table">');
-		var cell = right.append('<span class="row">')
+		var cell = right.append('<span class="row">');
 		row.text(video["ID"]+"&nbsp;");
-		cell = right.append('<span class="row">')
+		cell = right.append('<span class="row">');
 		cell.text(video["Title"]+"&nbsp;");
-		cell = right.append('<span class="row">')
+		cell = right.append('<span class="row">');
 		cell.text(video["Date on Link"]+"&nbsp;");
-		cell = right.append('<span class="row">')
+		cell = right.append('<span class="row">');
 		cell.text(video["Author/Orator"]+"&nbsp;");
 
 	}
