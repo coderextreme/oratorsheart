@@ -28,18 +28,21 @@ function displayVideo(video) {
 		videoId = '//www.youtube.com/embed/'+videoId;
 	}
 	if (typeof videoId !== 'undefined' && videoId !== '') {
-		$("#table").append('<div class="row">'+
-				(videoId.match(/facebook/) ?
+		var v = $("#table")
+			.append('<div class="row">')
+			.append((videoId.match(/facebook/) ?
 					'<span class="cell"><iframe src="https://www.facebook.com/plugins/video.php?href='+videoId+'&width=420&show_text=false&height=0&appId" width="420" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe></sapn'
 				: '<span class="cell"><iframe width="420" height="315" src="'+
-				videoId+'" frameborder="0" allowfullscreen></iframe></span>')+
-				'<div class="table">'+
-				'<span class="row">'+video["ID"]+'</span>&nbsp;'+
-				'<span class="row">'+video["Title"]+'</span>&nbsp;'+
-				'<span class="row">'+video["Date on Link"]+'</span>&nbsp;'+
-				'<span class="row">'+video["Author/Orator"]+'</span>&nbsp;'+
-				'</div>'+
-				'</div>');
+				videoId+'" frameborder="0" allowfullscreen></iframe></span>'))
+			.append('<div class="table">');
+		var row = v.append('<span class="row">')
+		row.text(video["ID"]+"&nbsp;");
+		row = v.append('<span class="row">')
+		row.text(video["Title"]+"&nbsp;");
+		row = v.append('<span class="row">')
+		row.text(video["Date on Link"]+"&nbsp;");
+		row = v.append('<span class="row">')
+		row.text(video["Author/Orator"]+"&nbsp;");
 
 	}
 	return false;
