@@ -28,21 +28,24 @@ function displayVideo(video) {
 		videoId = '//www.youtube.com/embed/'+videoId;
 	}
 	if (typeof videoId !== 'undefined' && videoId !== '') {
-		var v = $("#table")
+		var row = $("#table")
 			.append('<div class="row">')
-			.append((videoId.match(/facebook/) ?
-					'<span class="cell"><iframe src="https://www.facebook.com/plugins/video.php?href='+videoId+'&width=420&show_text=false&height=0&appId" width="420" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe></sapn'
-				: '<span class="cell"><iframe width="420" height="315" src="'+
-				videoId+'" frameborder="0" allowfullscreen></iframe></span>'))
-			.append('<div class="table">');
-		var row = v.append('<span class="row">')
+		if (videoId.match(/facebook/)) {
+			var left = row.apepnd('<span class="cell"><iframe src="https://www.facebook.com/plugins/video.php?href='+videoId+'&width=420&show_text=false&height=0&appId" width="420" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe></sapn'
+				left.attr("href", videoId);
+		} else {
+			var left = row.append('<span class="cell"><iframe width="420" height="315" frameborder="0" allowfullscreen></iframe></span>'))
+			left.attr("src", videoId);
+		}
+		var right = row.append('<div class="table">');
+		var cell = right.append('<span class="row">')
 		row.text(video["ID"]+"&nbsp;");
-		row = v.append('<span class="row">')
-		row.text(video["Title"]+"&nbsp;");
-		row = v.append('<span class="row">')
-		row.text(video["Date on Link"]+"&nbsp;");
-		row = v.append('<span class="row">')
-		row.text(video["Author/Orator"]+"&nbsp;");
+		cell = right.append('<span class="row">')
+		cell.text(video["Title"]+"&nbsp;");
+		cell = right.append('<span class="row">')
+		cell.text(video["Date on Link"]+"&nbsp;");
+		cell = right.append('<span class="row">')
+		cell.text(video["Author/Orator"]+"&nbsp;");
 
 	}
 	return false;
