@@ -28,13 +28,13 @@ function displayVideo(video) {
 		videoId = '//www.youtube.com/embed/'+videoId;
 	}
 	if (typeof videoId !== 'undefined' && videoId !== '') {
-		var row = $("#table")
-			.append('<div class="row">')
+		$('<div id="row" class="row">').appendTo("#table");
 		if (videoId.match(/facebook/)) {
-			var left = row.append('<span class="cell"><iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURI(videoId)+'&width=420&show_text=false&height=0&appId" width="420" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe></sapn');
+			$('<span class="cell"><iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURI(videoId)+'&width=420&show_text=false&height=0&appId" width="420" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe></sapn').appendTo("#row");
 		} else {
-			var left = row.append('<span class="cell"><iframe width="420" height="315" frameborder="0" allowfullscreen></iframe></span>');
-			left.attr("src", videoId);
+			$('<span id="left" class="cell">').appendTo("#row");
+			$('<iframe id="iframe" width="420" height="315" frameborder="0" allowfullscreen>').appendTo("#left");
+			$("#iframe").attr("src", videoId);
 		}
 		var right = row.append('<div class="table">');
 		var cell = right.append('<span class="row">');
