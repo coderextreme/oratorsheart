@@ -34,7 +34,7 @@ function displayVideo(v, video) {
 		} else {
 			$('<span id="left'+v+'" class="cell">').appendTo($("#row"+v));
 			$('<iframe id="iframe'+v+'" width="420" height="315" frameborder="0" allowfullscreen>').appendTo($("#left"+v));
-			$("#iframe").attr("src", videoId);
+			$("#iframe"+v).attr("src", videoId);
 		}
 		$("#row"+v).append('<div id="right'+v+'" class="table">');
 		$("#right"+v).append('<span id="id'+v+'" class="row">');
