@@ -37,10 +37,14 @@ function displayVideo(v, video) {
 			$("#iframe").attr("src", videoId);
 		}
 		$("#row"+v).append('<div id="right'+v+'" class="table">');
-		$("#right"+v).append('<span class="row">').text(video["ID"]);
-		$("#right"+v).append('<span class="row">').text(video["Title"]);
-		$("#right"+v).append('<span class="row">').text(video["Date on Link"]);
-		$("#right"+v).append('<span class="row">').text(video["Author/Orator"]);
+		$("#right"+v).append('<span id="id'+v+'" class="row">');
+		$("#id"+v).text(video["ID"]);
+		$("#right"+v).append('<span id="title'+v+'" class="row">');
+		$("#title"+v).text(video["Title"]);
+		$("#right"+v).append('<span id="date'+v+'" class="row">');
+		$("#date"+v).text(video["Date on Link"]);
+		$("#right"+v).append('<span id="orator'+v+'" class="row">');
+		$("#orator"+v).text(video["Author/Orator"]);
 
 	}
 	return false;
