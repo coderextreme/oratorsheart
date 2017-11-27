@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
   videoId = 0;
   readSecretAndVideos("client_secret.json");
   res.render('search', { title: 'Search Videos' });
+  next();
 });
 
 router.post('/', function(req, res, next) {
@@ -40,6 +41,7 @@ router.post('/', function(req, res, next) {
 	} catch (e) {
 		console.log(e);
 	}
+        next();
 });
 
 var readline = require('readline');
