@@ -1,41 +1,45 @@
-
 $('#form').submit(function(e) {
+	e.stopPropagation();
 	e.preventDefault();
 	$("#table").empty();
-	$.post("/search", $(this).serialize(), function(videos) {
+        let body = { search : $("#search").val() };
+        console.log(body);
+
+	$.post("https://arcane-stream-10108.herokuapp.com/search",  body, function(videos) {
 		for (video in videos) {
 			displayVideo(video, videos[video]);
 		}
 	});
 });
 
-function getYouTubeId(url) {
-    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = url.match(regExp);
+function getSrc(video) {
+    // match against youtube URLs
+    const ytregExp = /^(https?:\/\/)(.*youtu.?be.*\/)(v\/|u\/\w\/|embed\/|watch\?v=|\&v=|)([^#\&\?]*).*/;
+    const ytmatch = video["Link"].match(ytregExp);
+    const fbregExp = /^(https?:\/\/).*facebook\.com.*\/.*\/videos?\/([0-9]+)/;
+    const fbmatch = video["Link"].match(fbregExp);
 
-    if (match && match[2].length == 11) {
-        return match[2];
+    let src = 'error';
+    if (ytmatch && ytmatch[4].length === 11) {
+      src = ytmatch[1] + 'www.youtube.com/embed/' + ytmatch[4];
+    } else if (fbmatch) {
+      src = fbmatch[1] + 'www.facebook.com/video/embed?video_id=' + fbmatch[2];
     } else {
-        return 'error';
+      src = video["Link"]; // TODO BAD IDEA
     }
+    
+    console.log(src);
+    return src;
 }
 
+
 function displayVideo(v, video) {
-	var videoId = getYouTubeId(video["Link"]);
-	if (videoId === 'error') {
-		videoId = 'https://www.facebook.com/0caa26a9-2921-4d85-80f5-f1fdea7a8e5f'.replace(/\//g, '%2F').replace(/:/g, '%3A');
-	} else {
-		videoId = '//www.youtube.com/embed/'+videoId;
-	}
-	if (typeof videoId !== 'undefined' && videoId !== '') {
+	var src = getSrc(video);
+	if (typeof src !== 'undefined' && src !== '') {
 		$('<div id="row'+v+'" class="row">').appendTo($("#table"));
-		if (videoId.match(/facebook/)) {
-			$('<span class="cell"><iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURI(videoId)+'&width=420&show_text=false&height=0&appId" width="420" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe></sapn').appendTo($("#row"+v));
-		} else {
-			$('<span id="left'+v+'" class="cell">').appendTo($("#row"+v));
-			$('<iframe id="iframe'+v+'" width="420" height="315" frameborder="0" allowfullscreen>').appendTo($("#left"+v));
-			$("#iframe"+v).attr("src", videoId);
-		}
+		$('<span id="left'+v+'" class="cell">').appendTo($("#row"+v));
+		$('<iframe id="iframe'+v+'" width="420" height="315" frameborder="0" allowfullscreen>').appendTo($("#left"+v));
+		$("#iframe"+v).attr("src", src);
 		$("#row"+v).append('<div id="right'+v+'" class="table">');
 		$("#right"+v).append('<span id="id'+v+'" class="row">');
 		$("#id"+v).text(video["ID"]);

@@ -6,20 +6,19 @@ var videos = [];
 var videoId = 0;
 
 
-/* GET home page. */
+router.loadVideos = function() {
+	// load the vides on the first get, so the search will have them
+	videos = [];
+	videoId = 0;
+	readSecretAndVideos("client_secret.json");
+};
+
 router.get('/', function(req, res, next) {
-  // load the vides on the first get
-  videos = [];
-  videoId = 0;
-  readSecretAndVideos("client_secret.json");
-  res.render('search', { title: 'Search Videos' });
+  	res.render('search', { title: "Search Videos" });
 });
 
 router.post('/', function(req, res, next) {
-        res.setHeader("Access-Control-Allow-Origin", "https://coderextreme.net");
-        res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	next();
-	console.log(req.body);
+	console.log("Search terms", req.body);
 	try {
 		var subvideos = [];
 		// linear search through the videos
@@ -29,16 +28,19 @@ router.post('/', function(req, res, next) {
 			for (field in videos[video]) {
 				columns[colId++] = videos[video][field]
 			}
-			var terms = req.body.search.split(" ");
+			var terms = req.body.params ? req.body.params.search.split(" ") : req.body.search ? req.body.search.split(" ") : '';
 			for (t in terms) {
 				var term = terms[t];
 				if (columns.join(" ").includes(term)) {
 					subvideos.push(videos[video]);
+					console.log("Found", term, "in", columns.join(" "));
 					break;
+				} else {
+					console.log("Not Found", term, "in", columns.join(" "));
 				}
 			}
 		}
-		console.log(subvideos);
+		console.log("Sending", subvideos);
 		res.json(subvideos);
 	} catch (e) {
 		console.log(e);
