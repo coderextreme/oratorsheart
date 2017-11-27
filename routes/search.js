@@ -16,8 +16,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	console.log(req.body);
 	try {
 		var subvideos = [];
@@ -42,7 +40,6 @@ router.post('/', function(req, res, next) {
 	} catch (e) {
 		console.log(e);
 	}
-    next();
 });
 
 var readline = require('readline');
