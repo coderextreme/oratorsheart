@@ -18,6 +18,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
         res.setHeader("Access-Control-Allow-Origin", "https://coderextreme.net");
         res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
 	console.log(req.body);
 	try {
 		var subvideos = [];
