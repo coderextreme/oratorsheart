@@ -9,7 +9,7 @@ var fs = require("fs");
 var app = express();
 
 app.use("/search", function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "https://coderextreme.net/busyvine/*");
+  res.setHeader("Access-Control-Allow-Origin", "https://coderextreme.net");
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
