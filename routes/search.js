@@ -13,10 +13,11 @@ router.get('/', function(req, res, next) {
   videoId = 0;
   readSecretAndVideos("client_secret.json");
   res.render('search', { title: 'Search Videos' });
-  next();
 });
 
 router.post('/', function(req, res, next) {
+        res.setHeader("Access-Control-Allow-Origin", "https://coderextreme.net/busyvine/*");
+        res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	console.log(req.body);
 	try {
 		var subvideos = [];
@@ -41,7 +42,6 @@ router.post('/', function(req, res, next) {
 	} catch (e) {
 		console.log(e);
 	}
-        next();
 });
 
 var readline = require('readline');
