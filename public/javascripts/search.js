@@ -5,9 +5,22 @@ $('#form').submit(function(e) {
         let body = { search : $("#search").val() };
         console.log(body);
 
-	$.post("https://arcane-stream-10108.herokuapp.com/search",  body, function(videos) {
-		for (video in videos) {
-			displayVideo(video, videos[video]);
+
+	$.ajax({
+		url: "https://arcane-stream-10108.herokuapp.com/search",
+		type: 'post',
+		data: body,
+		/*
+		headers: {
+			"Access-Control-Allow-Origin": "*",
+  	        	"Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+	 	},
+		*/
+		dataType: 'json',
+		success: function(videos) {
+			for (video in videos) {
+				displayVideo(video, videos[video]);
+			}
 		}
 	});
 });
