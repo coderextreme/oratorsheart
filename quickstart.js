@@ -80,7 +80,7 @@ function readVideos(auth) {
       console.log('No data found.');
     } else {
       for (var row in rows) {
-	if (row === 0) {
+	if (row == 0) {
 	  var object = row;
 	} else {
           var video= {};
