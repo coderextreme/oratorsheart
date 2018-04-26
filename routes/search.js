@@ -78,6 +78,7 @@ router.post('/', function(req, res, next) {
 		var subvideos = [];
 		// linear search through the videos
 		for (video in videos) {
+			console.log(videos[video]);
 			var columns = [];
 			colId = 0;
 			for (field in videos[video]) {
@@ -136,13 +137,16 @@ function readVideos(auth) {
       console.log('No data found.');
     } else {
       for (var row in rows) {
-	if (row === 0) {
+	console.log("row", row);
+	if (row == 0) {
+	  console.log("object", object);
 	  var object = rows[row];
 	} else {
           var video= {};
 	  for (col in object) {
 	    video[object[col]] = rows[row][col];
 	  }
+		console.log("Push", video);
 	  videos.push(video);
 	  videoId++;
         }

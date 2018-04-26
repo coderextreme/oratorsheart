@@ -7,7 +7,8 @@ $('#form').submit(function(e) {
 
 
 	$.ajax({
-		url: "https://arcane-stream-10108.herokuapp.com/search",
+		// url: "https://arcane-stream-10108.herokuapp.com/search",
+		url: "/search",
 		type: 'post',
 		data: body,
 		/*
