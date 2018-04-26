@@ -8,7 +8,7 @@ const readline = require('readline');
 // const google = require('googleapis');
 // const OAuth2Client = google.auth.OAuth2;
 const {google} = require('googleapis');
-const OAuth2 = google.auth.OAuth2;
+const OAuth2Client = google.auth.OAuth2;
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 const TOKEN_PATH = 'credentials.json';
 
@@ -20,7 +20,7 @@ const TOKEN_PATH = 'credentials.json';
  */
 function authorize(credentials, callback) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
-  const oAuth2Client = new OAuth2(client_id, client_secret, redirect_uris[0]);
+  const oAuth2Client = new OAuth2Client(client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
@@ -119,34 +119,27 @@ fs.readFile(secretFile, function processClientSecrets(err, content) {
 });
 }
 
-/**
- * Print the names and majors of students in a sample spreadsheet:
- * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
- * 
- * Side effects: populates videos, an array of video objects and a videoId,
- * the number of videos, in the environment
- */
+
 function readVideos(auth) {
-  var sheets = google.sheets('v4');
+  var sheets = google.sheets({version: 'v4', auth});
   sheets.spreadsheets.values.get({
-    auth: auth,
     spreadsheetId: '1X-RnAUgRRBNnWgS9_rsg1WlxPxWm7H-GFd-nAxWf7RY',
     range: 'Sheet1',
-  }, function(err, response) {
+  }, function(err, {data}) {
     if (err) {
       console.log('The API returned an error: ' + err);
       return;
     }
-    var rows = response.values;
-	  console.log(rows);
+    var rows = data.values;
+    console.log(rows);
     if (rows.length == 0) {
       console.log('No data found.');
     } else {
       for (var row in rows) {
-	if (row == 0) {
+	if (row === 0) {
 	  var object = rows[row];
 	} else {
-          var video = {};
+          var video= {};
 	  for (col in object) {
 	    video[object[col]] = rows[row][col];
 	  }
