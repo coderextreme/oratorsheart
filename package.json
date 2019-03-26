@@ -13,7 +13,7 @@
     "express": "*",
     "googleapis": "*",
     "google-auth-library": "*",
-    "jade": "*",
+    "pug": "*",
     "morgan": "*",
     "serve-favicon": "*"
   }
