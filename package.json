@@ -11,10 +11,10 @@
     "cors": "*",
     "debug": "*",
     "express": "*",
-    "googleapis": "*",
     "google-auth-library": "*",
-    "pug": "*",
+    "googleapis": "^48.0.0",
     "morgan": "*",
+    "pug": "*",
     "serve-favicon": "*"
   }
 }
