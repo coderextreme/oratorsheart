@@ -1,6 +1,6 @@
 {
   "name": "oratorsheart",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -10,9 +10,10 @@
     "cookie-parser": "*",
     "cors": "*",
     "debug": "*",
+    "punycode": "*",
     "express": "*",
     "google-auth-library": "*",
-    "googleapis": "^92.0.0",
+    "googleapis": "*",
     "morgan": "*",
     "pug": "*",
     "serve-favicon": "*"

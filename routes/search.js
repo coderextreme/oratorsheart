@@ -126,12 +126,12 @@ function readVideos(auth) {
   sheets.spreadsheets.values.get({
     spreadsheetId: '1X-RnAUgRRBNnWgS9_rsg1WlxPxWm7H-GFd-nAxWf7RY',
     range: 'Sheet1',
-  }, function(err, {data}) {
+  }, function(err, respose) {
     if (err) {
       console.log('The API returned an error: ' + err);
       return;
     }
-    var rows = data.values;
+    var rows = response.data.values;
     console.log(rows);
     if (rows.length == 0) {
       console.log('No data found.');
