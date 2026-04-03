@@ -12,12 +12,15 @@
     "debug": "4.4.3",
     "punycode": "*",
     "express": "*",
-    "glob": "^13.0.0",
-    "rimraf": "^6.1.2",
+    "glob": "13.0.0",
+    "rimraf": "6.1.2",
     "google-auth-library": "*",
     "googleapis": "*",
     "morgan": "*",
     "pug": "*",
     "serve-favicon": "*"
+  },
+  "overrides": {
+    "axios": "1.14.0"
   }
 }
